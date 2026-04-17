@@ -1,7 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt)
 }
+
+
+val pagingVersion by extra("3.3.5")
+val hiltVersion by extra(2.47)
+val retrofitVersion by extra("2.9.0")
+val roomVersion by extra("2.5.2")
 
 android {
     namespace = "com.benatt.datapagingapp"
@@ -66,4 +74,43 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    testImplementation(libs.kotlinx.coroutines.test)
+    implementation(libs.coroutines)
+
+    // Paging
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+
+    // Room ORM
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    implementation(libs.room.paging)
+    ksp(libs.room.compiler)
+    testImplementation(libs.room.testing)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.json)
+
+    // Dagger - Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.compose)
+
+    // OkHttp
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+
+    // Jackson
+    implementation(libs.jackson.core)
+    implementation(libs.jackson.annotation)
+    implementation(libs.jackson.databind)
+
+    // Mockk
+    testImplementation(libs.mockk)
+
+    // Mockito
+    testImplementation(libs.mockito)
 }
